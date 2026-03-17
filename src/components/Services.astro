@@ -1,41 +1,48 @@
 ---
-// Services section showcasing concrete offerings
+// Services section - SEO optimized with intent-matching copy
+// Each service addresses a specific search intent
 const services = [
   {
     title: "Driveways",
-    description: "Custom concrete driveways built to last. From simple slabs to decorative finishes.",
+    description: "The first thing people see when they pull up. We pour driveways that don't crack, sink, or embarrass you in front of the neighbors.",
     icon: "🚗",
-    features: ["Broom finish", "Exposed aggregate", "Stamped patterns"]
+    features: ["Broom finish", "Exposed aggregate", "Stamped patterns"],
+    keywords: "driveway concrete brownwood"
   },
   {
     title: "Patios & Porches",
-    description: "Extend your living space with a beautiful concrete patio or porch.",
+    description: "Turn your backyard into somewhere you actually want to spend time. From simple slabs to stamped showpieces.",
     icon: "🏡",
-    features: ["Stamped concrete", "Colored concrete", "Custom shapes"]
+    features: ["Stamped designs", "Colored concrete", "Custom shapes"],
+    keywords: "patio concrete contractor"
   },
   {
     title: "Sidewalks",
-    description: "Safe, level walkways for your home or business. ADA compliant options available.",
+    description: "Level, code-compliant walkways that won't trip grandma or your mailman. We handle permits and inspections.",
     icon: "🚶",
-    features: ["Residential", "Commercial", "Repairs"]
+    features: ["Residential", "Commercial", "ADA compliant"],
+    keywords: "sidewalk replacement brownwood tx"
   },
   {
     title: "Foundations",
-    description: "Solid foundations for sheds, garages, and additions. Built to code.",
+    description: "Building a shed, garage, or shop? Start with a foundation that won't shift, crack, or give you headaches down the road.",
     icon: "🏗️",
-    features: ["Slab-on-grade", "Garage pads", "Outbuildings"]
+    features: ["Slab-on-grade", "Garage pads", "Outbuildings"],
+    keywords: "concrete foundation contractor"
   },
   {
     title: "Decorative Concrete",
-    description: "Stamped, stained, and textured finishes that transform ordinary concrete.",
+    description: "Stamped stone patterns. Rich earth-tone stains. Make your concrete look like it cost twice as much.",
     icon: "✨",
-    features: ["Stamping", "Staining", "Scoring"]
+    features: ["Stamping", "Acid staining", "Scoring"],
+    keywords: "stamped concrete brownwood texas"
   },
   {
     title: "Steps & Ramps",
-    description: "Safe entry access with properly graded steps and ADA-compliant ramps.",
+    description: "Safe entry access built to last. From simple porch steps to ADA-compliant wheelchair ramps for aging parents.",
     icon: "🪜",
-    features: ["Entry steps", "Wheelchair ramps", "Handrails"]
+    features: ["Entry steps", "Wheelchair ramps", "Handrail posts"],
+    keywords: "concrete steps ramp contractor"
   }
 ];
 ---
@@ -46,20 +53,21 @@ const services = [
     <div class="text-center max-w-3xl mx-auto mb-16">
       <span class="text-orange-500 font-semibold text-sm uppercase tracking-wider">What We Do</span>
       <h2 class="mt-3 text-3xl md:text-4xl font-bold text-brand-slate">
-        Concrete Services for Every Need
+        Flatwork Done Right, the First Time
       </h2>
       <p class="mt-4 text-lg text-gray-600">
-        From driveways to decorative finishes, we handle it all. No job too small, no detail overlooked.
+        Driveways to decorative — if it's flat and it's concrete, we pour it. No job too small. 
+        Every job gets the same attention to prep, forms, and finish.
       </p>
     </div>
     
     <!-- Services Grid -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {services.map((service) => (
-        <div class="bg-white border border-gray-100 rounded-2xl p-8 card-hover">
-          <div class="text-4xl mb-4">{service.icon}</div>
+        <article class="bg-white border border-gray-100 rounded-2xl p-8 card-hover group">
+          <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">{service.icon}</div>
           <h3 class="text-xl font-bold text-brand-slate mb-3">{service.title}</h3>
-          <p class="text-gray-600 mb-4">{service.description}</p>
+          <p class="text-gray-600 mb-4 leading-relaxed">{service.description}</p>
           <ul class="space-y-2">
             {service.features.map((feature) => (
               <li class="flex items-center gap-2 text-sm text-gray-500">
@@ -70,14 +78,15 @@ const services = [
               </li>
             ))}
           </ul>
-        </div>
+        </article>
       ))}
     </div>
     
     <!-- CTA -->
     <div class="mt-16 text-center">
+      <p class="text-gray-600 mb-4">Not sure what you need? We'll come take a look — no charge, no pressure.</p>
       <a href="#quote" class="btn-primary text-lg px-8 py-4">
-        Get a Free Quote for Your Project
+        Request a Free Estimate
       </a>
     </div>
   </div>
