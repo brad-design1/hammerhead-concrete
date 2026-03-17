@@ -1,13 +1,13 @@
 ---
-// Quote Calculator - Lead capture with transparent pricing message
-// Voice: Straight-talking, anti-contractor-BS positioning
+// Quote Calculator - Interactive transparent pricing calculator
+// Integrated from Dain's job-estimator-calculator and transparent-pricing-model
 ---
 
 <section id="quote" class="section bg-brand-concrete">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
       
-      <!-- Left: Value Proposition -->
+      <!-- Left: Value Proposition + Live Example -->
       <div class="lg:sticky lg:top-24">
         <span class="text-orange-500 font-semibold text-sm uppercase tracking-wider">No Games</span>
         <h2 class="mt-3 text-3xl md:text-4xl font-bold text-brand-slate">
@@ -19,36 +19,30 @@
           labor hours, materials, everything. You'll know exactly where your money goes.
         </p>
         
-        <!-- The difference -->
-        <div class="mt-8 p-6 bg-white rounded-xl border border-gray-100">
-          <h3 class="font-semibold text-brand-slate mb-4">Here's what a Hammerhead quote looks like:</h3>
-          <div class="space-y-3 text-sm">
-            <div class="flex justify-between text-gray-600">
-              <span>Concrete (4.2 yards @ $145/yd)</span>
-              <span class="font-medium">$609</span>
-            </div>
-            <div class="flex justify-between text-gray-600">
-              <span>Rebar & mesh</span>
-              <span class="font-medium">$185</span>
-            </div>
-            <div class="flex justify-between text-gray-600">
-              <span>Forms & stakes</span>
-              <span class="font-medium">$120</span>
-            </div>
-            <div class="flex justify-between text-gray-600">
-              <span>Labor (6 hours @ $65/hr)</span>
-              <span class="font-medium">$390</span>
-            </div>
-            <div class="flex justify-between text-gray-600">
-              <span>Finish work & cleanup</span>
-              <span class="font-medium">$175</span>
-            </div>
-            <div class="border-t border-gray-200 pt-3 flex justify-between font-semibold text-brand-slate">
-              <span>Total</span>
-              <span>$1,479</span>
+        <!-- Live Quote Preview - Updates with calculator -->
+        <div class="mt-8 p-6 bg-white rounded-xl border border-gray-100 shadow-sm" id="quotePreview">
+          <h3 class="font-semibold text-brand-slate mb-4 flex items-center justify-between">
+            <span>📋 Your Estimate Preview</span>
+            <span class="text-xs text-gray-400 font-normal" id="previewNote">Enter project details →</span>
+          </h3>
+          
+          <div class="space-y-2 text-sm" id="quoteLineItems">
+            <!-- Default example - will be replaced by calculator -->
+            <div class="flex justify-between text-gray-400 italic">
+              <span>Fill out the form to see your itemized breakdown</span>
             </div>
           </div>
-          <p class="mt-4 text-xs text-gray-500 italic">Example quote for a 12×20 patio slab. Your project may vary.</p>
+          
+          <!-- Total will appear when calculated -->
+          <div class="hidden border-t border-gray-200 pt-4 mt-4" id="quoteTotalSection">
+            <div class="flex justify-between font-bold text-lg text-brand-slate">
+              <span>Estimated Total</span>
+              <span id="quoteTotal">$0</span>
+            </div>
+            <p class="text-xs text-gray-500 mt-2">
+              Final price confirmed after free on-site visit. This estimate is typically within 10%.
+            </p>
+          </div>
         </div>
         
         <!-- Trust points -->
@@ -79,118 +73,146 @@
         </div>
       </div>
       
-      <!-- Right: Quote Form -->
+      <!-- Right: Interactive Calculator -->
       <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10">
-        <h3 class="text-xl font-bold text-brand-slate mb-2">Get Your Free Estimate</h3>
-        <p class="text-gray-600 mb-6">Takes 30 seconds. We'll get back to you within 24 hours.</p>
+        <h3 class="text-xl font-bold text-brand-slate mb-2">Get Your Instant Estimate</h3>
+        <p class="text-gray-600 mb-6">See your itemized breakdown in real-time. No email required.</p>
         
         <form id="quote-form" class="space-y-6">
           <!-- Project Type -->
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-2">What do you need?</label>
-            <select name="projectType" required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors">
+            <select name="projectType" id="projectType" required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors">
               <option value="">Select your project...</option>
               <option value="driveway">Driveway (new or replace)</option>
-              <option value="patio">Patio or Porch</option>
+              <option value="patio-basic">Patio or Porch (standard finish)</option>
+              <option value="patio-stamped">Patio or Porch (stamped/decorative)</option>
               <option value="sidewalk">Sidewalk</option>
               <option value="foundation">Foundation / Slab</option>
               <option value="steps">Steps or Ramp</option>
-              <option value="decorative">Stamped / Stained Concrete</option>
-              <option value="other">Something Else</option>
             </select>
           </div>
           
-          <!-- Approximate Size -->
+          <!-- Square Footage -->
           <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">About how big? (square feet)</label>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Approximate size (square feet)</label>
             <input 
               type="number" 
               name="squareFeet" 
+              id="squareFeet"
               placeholder="e.g., 400" 
               required
-              min="10"
+              min="50"
+              max="5000"
               class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
             />
-            <p class="mt-1 text-xs text-gray-500">Not sure? Just guess — we'll measure it when we come out.</p>
+            <p class="mt-1 text-xs text-gray-500">
+              <strong>Quick refs:</strong> 1-car driveway ≈ 200 sq ft | 2-car ≈ 400-500 sq ft | 12×16 patio = 192 sq ft
+            </p>
           </div>
           
-          <!-- Finish Type -->
+          <!-- Thickness -->
           <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Finish type</label>
-            <div class="grid grid-cols-2 gap-3">
-              <label class="relative flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-orange-500 transition-colors">
-                <input type="radio" name="finish" value="standard" class="sr-only peer" checked />
-                <span class="peer-checked:text-orange-500">
-                  <span class="block font-medium">Standard</span>
-                  <span class="block text-xs text-gray-500">Broom finish</span>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Thickness</label>
+            <div class="grid grid-cols-3 gap-3">
+              <label class="relative flex items-center justify-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-orange-500 transition-colors">
+                <input type="radio" name="thickness" value="4" class="sr-only peer" checked />
+                <span class="peer-checked:text-orange-500 text-center">
+                  <span class="block font-medium">4"</span>
+                  <span class="block text-xs text-gray-500">Standard</span>
                 </span>
                 <span class="absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-orange-500"></span>
               </label>
-              <label class="relative flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-orange-500 transition-colors">
-                <input type="radio" name="finish" value="decorative" class="sr-only peer" />
-                <span class="peer-checked:text-orange-500">
-                  <span class="block font-medium">Decorative</span>
-                  <span class="block text-xs text-gray-500">Stamped/Stained</span>
+              <label class="relative flex items-center justify-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-orange-500 transition-colors">
+                <input type="radio" name="thickness" value="5" class="sr-only peer" />
+                <span class="peer-checked:text-orange-500 text-center">
+                  <span class="block font-medium">5"</span>
+                  <span class="block text-xs text-gray-500">Medium</span>
+                </span>
+                <span class="absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-orange-500"></span>
+              </label>
+              <label class="relative flex items-center justify-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-orange-500 transition-colors">
+                <input type="radio" name="thickness" value="6" class="sr-only peer" />
+                <span class="peer-checked:text-orange-500 text-center">
+                  <span class="block font-medium">6"</span>
+                  <span class="block text-xs text-gray-500">Heavy duty</span>
                 </span>
                 <span class="absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-orange-500"></span>
               </label>
             </div>
           </div>
+          
+          <!-- Add-ons -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-3">Additional options</label>
+            <div class="space-y-3">
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" id="removal" name="removal" class="w-5 h-5 rounded border-gray-300 text-orange-500 focus:ring-orange-500" />
+                <span class="text-sm text-gray-600">Existing concrete removal needed</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" id="sealer" name="sealer" class="w-5 h-5 rounded border-gray-300 text-orange-500 focus:ring-orange-500" />
+                <span class="text-sm text-gray-600">Professional sealer (recommended)</span>
+              </label>
+            </div>
+          </div>
+          
+          <hr class="border-gray-100" />
           
           <!-- Contact Info -->
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Your name</label>
+          <div>
+            <p class="text-sm text-gray-600 mb-4">
+              <strong>Want the full quote?</strong> Enter your info and we'll send the complete itemized breakdown plus schedule a free on-site measurement.
+            </p>
+            
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Your name</label>
+                <input 
+                  type="text" 
+                  name="name" 
+                  id="customerName"
+                  placeholder="John Smith" 
+                  required
+                  class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Phone</label>
+                <input 
+                  type="tel" 
+                  name="phone" 
+                  id="customerPhone"
+                  placeholder="(325) 555-1234" 
+                  required
+                  class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                />
+              </div>
+            </div>
+            
+            <div class="mt-4">
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+              <input 
+                type="email" 
+                name="email" 
+                id="customerEmail"
+                placeholder="john@example.com" 
+                required
+                class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+              />
+            </div>
+            
+            <div class="mt-4">
+              <label class="block text-sm font-semibold text-gray-700 mb-2">City/Area</label>
               <input 
                 type="text" 
-                name="name" 
-                placeholder="John Smith" 
+                name="city" 
+                id="customerCity"
+                placeholder="Brownwood, TX" 
                 required
                 class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
               />
             </div>
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Phone</label>
-              <input 
-                type="tel" 
-                name="phone" 
-                placeholder="(325) 555-1234" 
-                required
-                class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
-              />
-            </div>
-          </div>
-          
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
-            <input 
-              type="email" 
-              name="email" 
-              placeholder="john@example.com" 
-              required
-              class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
-            />
-          </div>
-          
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Where's the project?</label>
-            <input 
-              type="text" 
-              name="city" 
-              placeholder="Brownwood, TX" 
-              required
-              class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
-            />
-          </div>
-          
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Anything else? (optional)</label>
-            <textarea 
-              name="details" 
-              rows="3"
-              placeholder="Slope issues? Existing concrete removal? Timeline?"
-              class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors resize-none"
-            ></textarea>
           </div>
           
           <!-- Submit -->
@@ -198,14 +220,14 @@
             type="submit" 
             class="w-full btn-primary text-lg py-4 flex items-center justify-center gap-2"
           >
-            Send My Project Details
+            Send My Estimate Request
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
           </button>
           
           <p class="text-center text-xs text-gray-500">
-            We'll respond within 24 hours with a detailed, itemized estimate.
+            Dain will call within 24 hours to schedule your free on-site measurement.
           </p>
         </form>
       </div>
@@ -214,13 +236,161 @@
 </section>
 
 <script>
+  // Pricing constants from transparent-pricing-model.md
+  const PRICING = {
+    concretePerYard: 160, // 4000 PSI standard
+    rebarPerFt: 0.80,
+    gravelPerTon: 30,
+    formsPerFt: 3,
+    jointsPerFt: 0.75,
+    sealerPerSqft: 0.45,
+    removalPerSqft: 1.50,
+    laborDainPerHr: 65,
+    equipmentPerDay: 85,
+    overheadPerJob: 700,
+    stampedPerSqft: 4.50,
+    stainedPerSqft: 2.50,
+    profitMargin: 0.20
+  };
+  
+  // Job type multipliers and labor factors
+  const JOB_TYPES = {
+    'driveway': { laborFactor: 1.0, addons: [] },
+    'patio-basic': { laborFactor: 1.0, addons: [] },
+    'patio-stamped': { laborFactor: 1.5, addons: ['stamped'] },
+    'sidewalk': { laborFactor: 1.0, addons: [] },
+    'foundation': { laborFactor: 1.2, addons: [] },
+    'steps': { laborFactor: 1.3, addons: [] }
+  };
+  
+  function calculateEstimate() {
+    const projectType = document.getElementById('projectType').value;
+    const squareFeet = parseFloat(document.getElementById('squareFeet').value) || 0;
+    const thickness = parseInt(document.querySelector('input[name="thickness"]:checked')?.value || 4);
+    const removal = document.getElementById('removal').checked;
+    const sealer = document.getElementById('sealer').checked;
+    
+    if (!projectType || squareFeet < 50) {
+      return null;
+    }
+    
+    const jobType = JOB_TYPES[projectType] || JOB_TYPES['driveway'];
+    const isStamped = projectType === 'patio-stamped';
+    
+    // Calculate concrete yards
+    const yardsExact = (squareFeet * thickness) / 324;
+    const yards = Math.ceil(yardsExact * 1.1 * 10) / 10; // 10% waste
+    
+    // Materials
+    const concreteCost = Math.round(yards * PRICING.concretePerYard);
+    const rebarLinearFeet = squareFeet * 1.2;
+    const rebarCost = Math.round(rebarLinearFeet * PRICING.rebarPerFt);
+    const gravelTons = Math.ceil(squareFeet * thickness / 150);
+    const gravelCost = Math.round(gravelTons * PRICING.gravelPerTon);
+    const formsLinearFeet = Math.sqrt(squareFeet) * 4;
+    const formsCost = Math.round(formsLinearFeet * PRICING.formsPerFt);
+    
+    // Add-ons
+    const stampedCost = isStamped ? Math.round(squareFeet * PRICING.stampedPerSqft) : 0;
+    const sealerCost = sealer ? Math.round(squareFeet * PRICING.sealerPerSqft) : 0;
+    const removalCost = removal ? Math.round(squareFeet * PRICING.removalPerSqft) : 0;
+    
+    // Labor
+    let baseHours = squareFeet / 25;
+    baseHours *= jobType.laborFactor;
+    if (removal) baseHours += 4;
+    const laborHours = Math.ceil(baseHours);
+    const laborCost = Math.round(laborHours * PRICING.laborDainPerHr);
+    
+    // Equipment
+    const equipmentDays = Math.ceil(laborHours / 10);
+    const equipmentCost = Math.round(equipmentDays * PRICING.equipmentPerDay);
+    
+    // Subtotal + profit
+    const materialsCost = concreteCost + rebarCost + gravelCost + formsCost + stampedCost + sealerCost + removalCost;
+    const subtotal = materialsCost + laborCost + equipmentCost + PRICING.overheadPerJob;
+    const profit = Math.round(subtotal * PRICING.profitMargin);
+    const total = subtotal + profit;
+    
+    return {
+      yards,
+      concreteCost,
+      rebarCost,
+      gravelCost,
+      formsCost,
+      stampedCost,
+      sealerCost,
+      removalCost,
+      laborHours,
+      laborCost,
+      equipmentCost,
+      overhead: PRICING.overheadPerJob,
+      subtotal,
+      profit,
+      total,
+      pricePerSqft: (total / squareFeet).toFixed(2)
+    };
+  }
+  
+  function updateQuotePreview() {
+    const estimate = calculateEstimate();
+    const lineItemsEl = document.getElementById('quoteLineItems');
+    const totalSectionEl = document.getElementById('quoteTotalSection');
+    const previewNoteEl = document.getElementById('previewNote');
+    
+    if (!estimate) {
+      lineItemsEl.innerHTML = '<div class="flex justify-between text-gray-400 italic"><span>Fill out the form to see your itemized breakdown</span></div>';
+      totalSectionEl.classList.add('hidden');
+      previewNoteEl.textContent = 'Enter project details →';
+      return;
+    }
+    
+    previewNoteEl.textContent = `$${estimate.pricePerSqft}/sq ft`;
+    
+    let html = '';
+    
+    // Build line items
+    html += `<div class="flex justify-between text-gray-600"><span>Concrete (${estimate.yards} yards)</span><span class="font-medium">$${estimate.concreteCost.toLocaleString()}</span></div>`;
+    html += `<div class="flex justify-between text-gray-600"><span>Rebar & reinforcement</span><span class="font-medium">$${estimate.rebarCost.toLocaleString()}</span></div>`;
+    html += `<div class="flex justify-between text-gray-600"><span>Gravel base</span><span class="font-medium">$${estimate.gravelCost.toLocaleString()}</span></div>`;
+    html += `<div class="flex justify-between text-gray-600"><span>Forms & lumber</span><span class="font-medium">$${estimate.formsCost.toLocaleString()}</span></div>`;
+    
+    if (estimate.stampedCost > 0) {
+      html += `<div class="flex justify-between text-gray-600"><span>Stamped finish materials</span><span class="font-medium">$${estimate.stampedCost.toLocaleString()}</span></div>`;
+    }
+    if (estimate.sealerCost > 0) {
+      html += `<div class="flex justify-between text-gray-600"><span>Professional sealer</span><span class="font-medium">$${estimate.sealerCost.toLocaleString()}</span></div>`;
+    }
+    if (estimate.removalCost > 0) {
+      html += `<div class="flex justify-between text-gray-600"><span>Existing removal</span><span class="font-medium">$${estimate.removalCost.toLocaleString()}</span></div>`;
+    }
+    
+    html += `<div class="flex justify-between text-gray-600"><span>Labor (${estimate.laborHours} hrs)</span><span class="font-medium">$${estimate.laborCost.toLocaleString()}</span></div>`;
+    html += `<div class="flex justify-between text-gray-600"><span>Equipment</span><span class="font-medium">$${estimate.equipmentCost.toLocaleString()}</span></div>`;
+    html += `<div class="flex justify-between text-gray-600"><span>Overhead</span><span class="font-medium">$${estimate.overhead.toLocaleString()}</span></div>`;
+    
+    lineItemsEl.innerHTML = html;
+    
+    // Show total
+    document.getElementById('quoteTotal').textContent = `$${estimate.total.toLocaleString()}`;
+    totalSectionEl.classList.remove('hidden');
+  }
+  
+  // Add event listeners for live updates
+  document.getElementById('projectType')?.addEventListener('change', updateQuotePreview);
+  document.getElementById('squareFeet')?.addEventListener('input', updateQuotePreview);
+  document.querySelectorAll('input[name="thickness"]').forEach(el => {
+    el.addEventListener('change', updateQuotePreview);
+  });
+  document.getElementById('removal')?.addEventListener('change', updateQuotePreview);
+  document.getElementById('sealer')?.addEventListener('change', updateQuotePreview);
+  
+  // Form submission
   document.getElementById('quote-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
+    const estimate = calculateEstimate();
+    const total = estimate ? `$${estimate.total.toLocaleString()}` : 'Custom quote needed';
     
-    // Success message
-    alert('Got it! Dain will review your project and get back to you within 24 hours with a detailed, itemized estimate. No pressure, no sales pitch — just numbers.');
-    form.reset();
+    alert(`Thanks! Your estimated project total: ${total}\n\nDain will call you within 24 hours to schedule a free on-site measurement and confirm your final quote.`);
   });
 </script>
