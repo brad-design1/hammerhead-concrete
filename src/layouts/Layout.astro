@@ -1,0 +1,79 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Professional concrete contractor in Brownwood, TX. Driveways, patios, sidewalks, foundations, and decorative concrete. 10+ years experience. Free estimates." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <title>{title}</title>
+    
+    <!-- Schema.org for Local Business -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Hammerhead Concrete",
+        "description": "Professional concrete contractor serving Brownwood, TX and surrounding areas",
+        "telephone": "+1-325-430-8305",
+        "email": "daincox040@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Brownwood",
+          "addressRegion": "TX",
+          "addressCountry": "US"
+        },
+        "areaServed": {
+          "@type": "GeoCircle",
+          "geoMidpoint": {
+            "@type": "GeoCoordinates",
+            "latitude": 31.7093,
+            "longitude": -98.9912
+          },
+          "geoRadius": "48280"
+        },
+        "priceRange": "$$",
+        "openingHours": "Mo-Sa 07:00-18:00"
+      }
+    </script>
+  </head>
+  <body class="antialiased">
+    <slot />
+    
+    <!-- Mobile Call Button -->
+    <a 
+      href="tel:+13254308305" 
+      class="fixed bottom-6 right-6 z-50 md:hidden flex items-center justify-center w-14 h-14 bg-orange-500 text-white rounded-full shadow-lg hover:bg-orange-600 transition-colors"
+      aria-label="Call Hammerhead Concrete"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+      </svg>
+    </a>
+  </body>
+</html>

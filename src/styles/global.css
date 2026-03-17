@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+/* Hammerhead Concrete Brand Tokens */
+:root {
+  /* Brand Colors */
+  --brand-slate: #2D3640;
+  --brand-steel: #8A8E91;
+  --brand-navy: #2B4257;
+  --brand-silver: #B5B8BA;
+  --brand-concrete: #D2CFC9;
+  --brand-dark: #1E262E;
+  
+  /* Semantic Colors */
+  --color-primary: var(--brand-slate);
+  --color-secondary: var(--brand-navy);
+  --color-accent: #F97316; /* Orange accent for CTAs */
+  --color-text: var(--brand-dark);
+  --color-text-muted: var(--brand-steel);
+  --color-background: #FFFFFF;
+  --color-surface: var(--brand-concrete);
+  
+  /* Typography */
+  --font-heading: 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  line-height: 1.6;
+}
+
+/* Custom Utilities */
+.text-brand-slate { color: var(--brand-slate); }
+.text-brand-navy { color: var(--brand-navy); }
+.text-brand-steel { color: var(--brand-steel); }
+.bg-brand-slate { background-color: var(--brand-slate); }
+.bg-brand-navy { background-color: var(--brand-navy); }
+.bg-brand-concrete { background-color: var(--brand-concrete); }
+.bg-brand-silver { background-color: var(--brand-silver); }
+
+/* Concrete texture overlay */
+.concrete-texture {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-blend-mode: overlay;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-orange-500 rounded-lg transition-all duration-200 hover:bg-orange-600 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center px-6 py-3 text-base font-semibold border-2 rounded-lg transition-all duration-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2;
+  color: var(--brand-slate);
+  border-color: var(--brand-slate);
+}
+
+.btn-secondary:hover {
+  background-color: var(--brand-slate);
+  color: white;
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+}
+
+/* Section spacing */
+.section {
+  @apply py-16 md:py-24;
+}
+
+/* Gradient overlays */
+.gradient-dark {
+  background: linear-gradient(to bottom, rgba(30, 38, 46, 0.8), rgba(30, 38, 46, 0.95));
+}

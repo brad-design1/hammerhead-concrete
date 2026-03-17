@@ -1,0 +1,218 @@
+---
+// AI-powered transparent quote calculator - the hero feature
+---
+
+<section id="quote" class="section bg-brand-concrete">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+      
+      <!-- Left: Value Proposition -->
+      <div class="lg:sticky lg:top-24">
+        <span class="text-orange-500 font-semibold text-sm uppercase tracking-wider">Transparent Pricing</span>
+        <h2 class="mt-3 text-3xl md:text-4xl font-bold text-brand-slate">
+          Get an Instant Fair Estimate
+        </h2>
+        <p class="mt-4 text-lg text-gray-600">
+          No games. No hidden fees. Just honest pricing based on your actual project. 
+          We itemize everything so you know exactly what you're paying for.
+        </p>
+        
+        <!-- Trust Points -->
+        <div class="mt-8 space-y-4">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-brand-slate">100% Itemized Quotes</h4>
+              <p class="text-sm text-gray-600">See exactly how your price is calculated — materials, labor, everything.</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-brand-slate">No Pressure, No Obligation</h4>
+              <p class="text-sm text-gray-600">Get your estimate instantly. We'll follow up only if you want us to.</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-brand-slate">Talk to a Human</h4>
+              <p class="text-sm text-gray-600">Prefer to talk? Call Dain directly at <a href="tel:+13254308305" class="text-orange-500 font-semibold">(325) 430-8305</a></p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Social Proof -->
+        <div class="mt-8 p-6 bg-white rounded-xl border border-gray-100">
+          <div class="flex items-center gap-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-brand-slate rounded-full flex items-center justify-center text-white font-bold">
+                10+
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold text-brand-slate">10+ Years Experience</p>
+              <p class="text-sm text-gray-600">Zero complaints. That's our promise.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right: Quote Form -->
+      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10">
+        <form id="quote-form" class="space-y-6">
+          <!-- Project Type -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">What type of project?</label>
+            <select name="projectType" required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors">
+              <option value="">Select project type...</option>
+              <option value="driveway">Driveway</option>
+              <option value="patio">Patio / Porch</option>
+              <option value="sidewalk">Sidewalk</option>
+              <option value="foundation">Foundation / Slab</option>
+              <option value="steps">Steps / Ramp</option>
+              <option value="decorative">Decorative Concrete</option>
+              <option value="other">Other / Multiple</option>
+            </select>
+          </div>
+          
+          <!-- Approximate Size -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Approximate size (square feet)</label>
+            <input 
+              type="number" 
+              name="squareFeet" 
+              placeholder="e.g., 400" 
+              required
+              min="10"
+              class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+            />
+            <p class="mt-1 text-xs text-gray-500">Don't know? We can measure during our free on-site visit.</p>
+          </div>
+          
+          <!-- Finish Type -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Finish type</label>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="relative flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-orange-500 transition-colors">
+                <input type="radio" name="finish" value="standard" class="sr-only peer" checked />
+                <span class="peer-checked:text-orange-500">
+                  <span class="block font-medium">Standard</span>
+                  <span class="block text-xs text-gray-500">Broom finish</span>
+                </span>
+                <span class="absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-orange-500"></span>
+              </label>
+              <label class="relative flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-orange-500 transition-colors">
+                <input type="radio" name="finish" value="decorative" class="sr-only peer" />
+                <span class="peer-checked:text-orange-500">
+                  <span class="block font-medium">Decorative</span>
+                  <span class="block text-xs text-gray-500">Stamped/Stained</span>
+                </span>
+                <span class="absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-orange-500"></span>
+              </label>
+            </div>
+          </div>
+          
+          <!-- Contact Info -->
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Your name</label>
+              <input 
+                type="text" 
+                name="name" 
+                placeholder="John Smith" 
+                required
+                class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Phone number</label>
+              <input 
+                type="tel" 
+                name="phone" 
+                placeholder="(325) 555-1234" 
+                required
+                class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+              />
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Email address</label>
+            <input 
+              type="email" 
+              name="email" 
+              placeholder="john@example.com" 
+              required
+              class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+            />
+          </div>
+          
+          <!-- Address / City -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">City / Area</label>
+            <input 
+              type="text" 
+              name="city" 
+              placeholder="Brownwood, TX" 
+              required
+              class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+            />
+          </div>
+          
+          <!-- Additional Details -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Anything else we should know? (optional)</label>
+            <textarea 
+              name="details" 
+              rows="3"
+              placeholder="Slope, existing concrete removal, specific patterns, timeline..."
+              class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors resize-none"
+            ></textarea>
+          </div>
+          
+          <!-- Submit -->
+          <button 
+            type="submit" 
+            class="w-full btn-primary text-lg py-4 flex items-center justify-center gap-2"
+          >
+            Get My Free Estimate
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          
+          <p class="text-center text-xs text-gray-500">
+            We'll get back to you within 24 hours with a detailed estimate.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.getElementById('quote-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    
+    // For now, show success message (actual submission would go to backend)
+    alert('Thank you! Dain will review your project and get back to you within 24 hours with a detailed, itemized estimate.');
+    form.reset();
+  });
+</script>

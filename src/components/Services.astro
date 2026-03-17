@@ -1,0 +1,84 @@
+---
+// Services section showcasing concrete offerings
+const services = [
+  {
+    title: "Driveways",
+    description: "Custom concrete driveways built to last. From simple slabs to decorative finishes.",
+    icon: "🚗",
+    features: ["Broom finish", "Exposed aggregate", "Stamped patterns"]
+  },
+  {
+    title: "Patios & Porches",
+    description: "Extend your living space with a beautiful concrete patio or porch.",
+    icon: "🏡",
+    features: ["Stamped concrete", "Colored concrete", "Custom shapes"]
+  },
+  {
+    title: "Sidewalks",
+    description: "Safe, level walkways for your home or business. ADA compliant options available.",
+    icon: "🚶",
+    features: ["Residential", "Commercial", "Repairs"]
+  },
+  {
+    title: "Foundations",
+    description: "Solid foundations for sheds, garages, and additions. Built to code.",
+    icon: "🏗️",
+    features: ["Slab-on-grade", "Garage pads", "Outbuildings"]
+  },
+  {
+    title: "Decorative Concrete",
+    description: "Stamped, stained, and textured finishes that transform ordinary concrete.",
+    icon: "✨",
+    features: ["Stamping", "Staining", "Scoring"]
+  },
+  {
+    title: "Steps & Ramps",
+    description: "Safe entry access with properly graded steps and ADA-compliant ramps.",
+    icon: "🪜",
+    features: ["Entry steps", "Wheelchair ramps", "Handrails"]
+  }
+];
+---
+
+<section id="services" class="section bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-orange-500 font-semibold text-sm uppercase tracking-wider">What We Do</span>
+      <h2 class="mt-3 text-3xl md:text-4xl font-bold text-brand-slate">
+        Concrete Services for Every Need
+      </h2>
+      <p class="mt-4 text-lg text-gray-600">
+        From driveways to decorative finishes, we handle it all. No job too small, no detail overlooked.
+      </p>
+    </div>
+    
+    <!-- Services Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {services.map((service) => (
+        <div class="bg-white border border-gray-100 rounded-2xl p-8 card-hover">
+          <div class="text-4xl mb-4">{service.icon}</div>
+          <h3 class="text-xl font-bold text-brand-slate mb-3">{service.title}</h3>
+          <p class="text-gray-600 mb-4">{service.description}</p>
+          <ul class="space-y-2">
+            {service.features.map((feature) => (
+              <li class="flex items-center gap-2 text-sm text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-orange-500 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    
+    <!-- CTA -->
+    <div class="mt-16 text-center">
+      <a href="#quote" class="btn-primary text-lg px-8 py-4">
+        Get a Free Quote for Your Project
+      </a>
+    </div>
+  </div>
+</section>
